@@ -13,7 +13,7 @@ func NewRouter() *gin.Engine {
 	// 路由组
 	v1 := r.Group("v1")
 	{
-		v1.GET("/user/uid/:uid", user.Get)
+		v1.GET("/user/uid/:uid", user.User)
 		v1.GET("/user/list", user.List)
 		v1.PUT("/user/modify/:uid", user.Modify)
 		v1.DELETE("/user/delete/:uid", user.Delete)

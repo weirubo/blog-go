@@ -21,3 +21,30 @@ func (u User) CreateUser(db *gorm.DB) error {
 	}
 	return db.Create(&u).Error
 }
+
+func (u User) GetUser(db *gorm.DB) (User, error) {
+	user := User{}
+	tx := db.Where(&u).Find(&user)
+	if tx.Error != nil {
+		return user, tx.Error
+	}
+	return user, nil
+}
+
+func (u User) GetUserByUid(db *gorm.DB, uid int) (User, error) {
+	user := User{}
+	tx := db.Where("id", uid).Find(&user)
+	if tx.Error != nil {
+		return user, tx.Error
+	}
+	return user, nil
+}
+
+func (u User) GetUserList(db *gorm.DB, pageOffset, pageSize int) ([]User, error) {
+	var users []User
+	tx := db.Offset(pageOffset).Limit(pageSize).Find(&users)
+	if tx.Error != nil {
+		return nil, tx.Error
+	}
+	return users, nil
+}

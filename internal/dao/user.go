@@ -14,3 +14,21 @@ func (d *Dao) CreateUser(username, email, password string) error {
 	}
 	return user.CreateUser(d.dbEngine)
 }
+
+func (d *Dao) GetUser(email, password string) (model.User, error) {
+	user := model.User{
+		Email:    email,
+		Password: password,
+	}
+	return user.GetUser(d.dbEngine)
+}
+
+func (d *Dao) GetUserByUid(uid int) (model.User, error) {
+	user := model.User{}
+	return user.GetUserByUid(d.dbEngine, uid)
+}
+
+func (d *Dao) GetUserList(pageOffset, pageSize int) ([]model.User, error) {
+	user := model.User{}
+	return user.GetUserList(d.dbEngine, pageOffset, pageSize)
+}

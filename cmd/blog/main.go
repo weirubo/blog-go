@@ -25,7 +25,7 @@ func main() {
 		WriteTimeout:   time.Second * 10,
 		MaxHeaderBytes: 1 << 20,
 	}
-	server.ListenAndServe()
+	_ = server.ListenAndServe()
 }
 
 // 初始化数据库
