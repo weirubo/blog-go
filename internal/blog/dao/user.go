@@ -1,7 +1,7 @@
 package dao
 
 import (
-	"github.com/weirubo/blog-go/internal/model"
+	"github.com/weirubo/blog-go/internal/blog/model"
 	"gorm.io/gorm"
 )
 

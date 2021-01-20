@@ -2,7 +2,7 @@ package service
 
 import (
 	"github.com/weirubo/blog-go/global"
-	"github.com/weirubo/blog-go/internal/dao"
+	"github.com/weirubo/blog-go/internal/blog/dao"
 )
 
 type Service struct {

@@ -1,6 +1,6 @@
 package service
 
-import "github.com/weirubo/blog-go/internal/model"
+import "github.com/weirubo/blog-go/internal/blog/model"
 
 type CreateUserRequest struct {
 	UserName string `json:"username"`

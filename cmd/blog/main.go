@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/weirubo/blog-go/global"
-	"github.com/weirubo/blog-go/internal/model"
-	"github.com/weirubo/blog-go/internal/routers"
+	"github.com/weirubo/blog-go/internal/blog/model"
+	"github.com/weirubo/blog-go/internal/blog/routers"
 	"net/http"
 	"time"
 )

@@ -3,7 +3,7 @@ package v1
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/weirubo/blog-go/internal/service"
+	"github.com/weirubo/blog-go/internal/blog/service"
 	"net/http"
 	"strconv"
 )
