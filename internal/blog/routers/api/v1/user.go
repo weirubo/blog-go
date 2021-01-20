@@ -30,7 +30,7 @@ func (u User) User(c *gin.Context) {
 }
 
 func (u User) List(c *gin.Context) {
-	param := service.UserListByPage{}
+	param := service.UserListByPageRequest{}
 	err := c.ShouldBind(&param)
 	if err != nil {
 		fmt.Println("list error:", err)
@@ -49,12 +49,39 @@ func (u User) List(c *gin.Context) {
 }
 
 func (u User) Modify(c *gin.Context) {
-	data := gin.H{}
+	param := service.ModifyUserRequest{}
+	err := c.ShouldBind(&param)
+	if err != nil {
+		fmt.Println("modify error:", err)
+		return
+	}
+	s := service.New()
+	rows, err := s.Modify(&param)
+	if err != nil {
+		fmt.Println("Modify error:", err)
+		return
+	}
+	data := gin.H{
+		"rows": rows,
+	}
 	c.JSON(http.StatusOK, data)
 }
 
 func (u User) Delete(c *gin.Context) {
-	data := gin.H{}
+	uid, err := strconv.Atoi(c.Param("uid"))
+	if err != nil {
+		fmt.Println("delete error:", err)
+		return
+	}
+	s := service.New()
+	rows, err := s.Delete(uint(uid))
+	if err != nil {
+		fmt.Println("delete error:", err)
+		return
+	}
+	data := gin.H{
+		"rows": rows,
+	}
 	c.JSON(http.StatusOK, data)
 }
 

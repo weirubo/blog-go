@@ -48,3 +48,19 @@ func (u User) GetUserList(db *gorm.DB, pageOffset, pageSize int) ([]User, error)
 	}
 	return users, nil
 }
+
+func (u User) UpdateUser(db *gorm.DB) (int64, error) {
+	tx := db.Where("id", u.ID).Updates(&u)
+	if tx.Error != nil {
+		return 0, tx.Error
+	}
+	return tx.RowsAffected, nil
+}
+
+func (u User) DeleteUser(db *gorm.DB) (int64, error) {
+	tx := db.Where("id", u.ID).Delete(&User{})
+	if tx.Error != nil {
+		return 0, tx.Error
+	}
+	return tx.RowsAffected, nil
+}

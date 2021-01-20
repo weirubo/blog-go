@@ -15,7 +15,7 @@ func NewRouter() *gin.Engine {
 	{
 		v1.GET("/user/uid/:uid", user.User)
 		v1.GET("/user/list", user.List)
-		v1.PUT("/user/modify/:uid", user.Modify)
+		v1.PUT("/user/modify", user.Modify)
 		v1.DELETE("/user/delete/:uid", user.Delete)
 		v1.POST("/user/register", user.Register)
 		v1.POST("/user/login", user.Login)
