@@ -1,5 +1,11 @@
 package dao
 
-type Dao struct {
+import "gorm.io/gorm"
 
+type Dao struct {
+	dbEngine *gorm.DB
+}
+
+func New(dbEngine *gorm.DB) *Dao {
+	return &Dao{dbEngine: dbEngine}
 }

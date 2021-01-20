@@ -5,7 +5,7 @@ import (
 	apiV1 "github.com/weirubo/blog-go/internal/routers/api/v1"
 )
 
-func NewRouter () *gin.Engine {
+func NewRouter() *gin.Engine {
 	// 创建路由
 	// 返回一个不包含任何中间件的 Engine 实例
 	r := gin.New()
@@ -13,8 +13,8 @@ func NewRouter () *gin.Engine {
 	// 路由组
 	v1 := r.Group("v1")
 	{
-		v1.GET("/user/:uid", user.Get)
-		v1.GET("/users", user.List)
+		v1.GET("/user/uid/:uid", user.Get)
+		v1.GET("/user/list", user.List)
 		v1.PUT("/user/modify/:uid", user.Modify)
 		v1.DELETE("/user/delete/:uid", user.Delete)
 		v1.POST("/user/register", user.Register)
