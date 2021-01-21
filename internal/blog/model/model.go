@@ -2,15 +2,23 @@ package model
 
 import (
 	"fmt"
+	"github.com/weirubo/blog-go/pkg/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 )
 
 // 创建数据库
-func NewDBEngine() (*gorm.DB, error) {
-	db, err := gorm.Open(mysql.Open("root:root@tcp(127.0.0.1:3306)/blog-go?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{NamingStrategy: schema.NamingStrategy{
-		TablePrefix:   "blog_",
+func NewDBEngine(databaseConfig *config.DatabaseConfig) (*gorm.DB, error) {
+	db, err := gorm.Open(mysql.Open(fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=%s&parseTime=%t&loc=%s",
+		databaseConfig.UserName,
+		databaseConfig.Password,
+		databaseConfig.Host,
+		databaseConfig.DBName,
+		databaseConfig.Charset,
+		databaseConfig.ParseTime,
+		databaseConfig.Loc)), &gorm.Config{NamingStrategy: schema.NamingStrategy{
+		TablePrefix:   databaseConfig.TablePrefix,
 		SingularTable: true,
 	}})
 	if err != nil {
