@@ -44,15 +44,10 @@ func NewViper() (*Config, error) {
 	return config, nil
 }
 
-var configs = make(map[string]interface{})
-
 func (c *Config) ReadConfig(key string, value interface{}) error {
 	err := c.v.UnmarshalKey(key, value)
 	if err != nil {
 		return err
-	}
-	if _, ok := configs[key]; !ok {
-		configs[key] = value
 	}
 	return nil
 }
