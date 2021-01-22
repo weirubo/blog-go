@@ -13,32 +13,32 @@ type UserListByPageRequest struct {
 	PageSize int `json:"pageSize" form:"pageSize"`
 }
 
-type ModifyUserRequest struct {
+type EditUserRequest struct {
 	CreateUserRequest
-	ID uint `json:"uid"`
+	ID uint `json:"id"`
 }
 
-func (s Service) Register(param *CreateUserRequest) error {
+func (s Service) AddUser(param *CreateUserRequest) error {
 	return s.dao.CreateUser(param.UserName, param.Email, param.PassWord)
 }
 
-func (s Service) Login(param *CreateUserRequest) (model.User, error) {
-	return s.dao.GetUser(param.Email, param.PassWord)
+func (s Service) GetUser(id int) (model.User, error) {
+	return s.dao.GetUserByUid(id)
 }
 
-func (s Service) User(uid int) (model.User, error) {
-	return s.dao.GetUserByUid(uid)
-}
-
-func (s Service) List(param *UserListByPageRequest) ([]model.User, error) {
+func (s Service) UserList(param *UserListByPageRequest) ([]model.User, error) {
 	pageOffset := param.PageNum - 1
 	return s.dao.GetUserList(pageOffset, param.PageSize)
 }
 
-func (s Service) Modify(param *ModifyUserRequest) (int64, error) {
+func (s Service) EditUser(param *EditUserRequest) (int64, error) {
 	return s.dao.UpdateUser(param.ID, param.UserName, param.Email, param.PassWord)
 }
 
-func (s Service) Delete(uid uint) (int64, error) {
-	return s.dao.DeleteUser(uid)
+func (s Service) DeleteUser(id uint) (int64, error) {
+	return s.dao.DeleteUser(id)
+}
+
+func (s Service) Login(param *CreateUserRequest) (model.User, error) {
+	return s.dao.GetUserByEmail(param.Email, param.PassWord)
 }

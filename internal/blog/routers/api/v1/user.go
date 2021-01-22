@@ -11,14 +11,31 @@ import (
 type User struct {
 }
 
-func (u User) User(c *gin.Context) {
-	uid, err := strconv.Atoi(c.Param("uid"))
+func (u User) Add(c *gin.Context) {
+	param := service.CreateUserRequest{}
+	err := c.ShouldBind(&param)
 	if err != nil {
-		fmt.Println("uid error:", err)
+		fmt.Println("add error:", err)
 		return
 	}
 	s := service.New()
-	user, err := s.User(uid)
+	err = s.AddUser(&param)
+	if err != nil {
+		fmt.Println("add err:", err)
+		return
+	}
+	data := gin.H{}
+	c.JSON(http.StatusOK, data)
+}
+
+func (u User) Get(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		fmt.Println("get error:", err)
+		return
+	}
+	s := service.New()
+	user, err := s.GetUser(id)
 	if err != nil {
 		fmt.Println("get error:", err)
 		return
@@ -37,9 +54,9 @@ func (u User) List(c *gin.Context) {
 		return
 	}
 	s := service.New()
-	users, err := s.List(&param)
+	users, err := s.UserList(&param)
 	if err != nil {
-		fmt.Println("List error:", err)
+		fmt.Println("list error:", err)
 		return
 	}
 	data := gin.H{
@@ -48,17 +65,17 @@ func (u User) List(c *gin.Context) {
 	c.JSON(http.StatusOK, data)
 }
 
-func (u User) Modify(c *gin.Context) {
-	param := service.ModifyUserRequest{}
+func (u User) Edit(c *gin.Context) {
+	param := service.EditUserRequest{}
 	err := c.ShouldBind(&param)
 	if err != nil {
-		fmt.Println("modify error:", err)
+		fmt.Println("edit error:", err)
 		return
 	}
 	s := service.New()
-	rows, err := s.Modify(&param)
+	rows, err := s.EditUser(&param)
 	if err != nil {
-		fmt.Println("Modify error:", err)
+		fmt.Println("edit error:", err)
 		return
 	}
 	data := gin.H{
@@ -68,13 +85,13 @@ func (u User) Modify(c *gin.Context) {
 }
 
 func (u User) Delete(c *gin.Context) {
-	uid, err := strconv.Atoi(c.Param("uid"))
+	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		fmt.Println("delete error:", err)
 		return
 	}
 	s := service.New()
-	rows, err := s.Delete(uint(uid))
+	rows, err := s.DeleteUser(uint(id))
 	if err != nil {
 		fmt.Println("delete error:", err)
 		return
@@ -82,23 +99,6 @@ func (u User) Delete(c *gin.Context) {
 	data := gin.H{
 		"rows": rows,
 	}
-	c.JSON(http.StatusOK, data)
-}
-
-func (u User) Register(c *gin.Context) {
-	param := service.CreateUserRequest{}
-	err := c.ShouldBind(&param)
-	if err != nil {
-		fmt.Println("register error:", err)
-		return
-	}
-	s := service.New()
-	err = s.Register(&param)
-	if err != nil {
-		fmt.Println("Register err:", err)
-		return
-	}
-	data := gin.H{}
 	c.JSON(http.StatusOK, data)
 }
 
@@ -112,7 +112,7 @@ func (u User) Login(c *gin.Context) {
 	s := service.New()
 	user, err := s.Login(&param)
 	if err != nil {
-		fmt.Println("Login error:", err)
+		fmt.Println("login error:", err)
 		return
 	}
 	data := gin.H{

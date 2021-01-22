@@ -12,44 +12,44 @@ func (d *Dao) CreateUser(username, email, password string) error {
 		Email:    email,
 		Password: password,
 	}
-	return user.CreateUser(d.dbEngine)
+	return user.Create(d.dbEngine)
 }
 
-func (d *Dao) GetUser(email, password string) (model.User, error) {
+func (d *Dao) GetUserByEmail(email, password string) (model.User, error) {
 	user := model.User{
 		Email:    email,
 		Password: password,
 	}
-	return user.GetUser(d.dbEngine)
+	return user.GetByEmail(d.dbEngine)
 }
 
-func (d *Dao) GetUserByUid(uid int) (model.User, error) {
+func (d *Dao) GetUserByUid(id int) (model.User, error) {
 	user := model.User{}
-	return user.GetUserByUid(d.dbEngine, uid)
+	return user.GetById(d.dbEngine, id)
 }
 
 func (d *Dao) GetUserList(pageOffset, pageSize int) ([]model.User, error) {
 	user := model.User{}
-	return user.GetUserList(d.dbEngine, pageOffset, pageSize)
+	return user.List(d.dbEngine, pageOffset, pageSize)
 }
 
-func (d *Dao) UpdateUser(uid uint, username, email, password string) (int64, error) {
+func (d *Dao) UpdateUser(id uint, username, email, password string) (int64, error) {
 	user := model.User{
 		Model: gorm.Model{
-			ID: uid,
+			ID: id,
 		},
 		Username: username,
 		Email:    email,
 		Password: password,
 	}
-	return user.UpdateUser(d.dbEngine)
+	return user.Update(d.dbEngine)
 }
 
-func (d *Dao) DeleteUser(uid uint) (int64, error) {
+func (d *Dao) DeleteUser(id uint) (int64, error) {
 	user := model.User{
 		Model: gorm.Model{
-			ID: uid,
+			ID: id,
 		},
 	}
-	return user.DeleteUser(d.dbEngine)
+	return user.Delete(d.dbEngine)
 }
