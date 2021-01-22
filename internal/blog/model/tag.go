@@ -15,7 +15,7 @@ func (t Tag) Create(db *gorm.DB) error {
 	return db.Create(&t).Error
 }
 
-func (t Tag) GetById(db *gorm.DB, id int) (Tag, error) {
+func (t Tag) GetById(db *gorm.DB, id uint) (Tag, error) {
 	tag := Tag{}
 	tx := db.Where("id", id).Find(&tag)
 	if tx.Error != nil {

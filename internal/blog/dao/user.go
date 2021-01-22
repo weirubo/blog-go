@@ -23,7 +23,7 @@ func (d *Dao) GetUserByEmail(email, password string) (model.User, error) {
 	return user.GetByEmail(d.dbEngine)
 }
 
-func (d *Dao) GetUserByUid(id int) (model.User, error) {
+func (d *Dao) GetUserByUid(id uint) (model.User, error) {
 	user := model.User{}
 	return user.GetById(d.dbEngine, id)
 }

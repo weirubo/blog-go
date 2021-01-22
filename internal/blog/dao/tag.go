@@ -13,7 +13,7 @@ func (d *Dao) CreateTag(name string) error {
 	return tag.Create(d.dbEngine)
 }
 
-func (d *Dao) GetTagById(id int) (model.Tag, error) {
+func (d *Dao) GetTagById(id uint) (model.Tag, error) {
 	tag := model.Tag{}
 	return tag.GetById(d.dbEngine, id)
 }

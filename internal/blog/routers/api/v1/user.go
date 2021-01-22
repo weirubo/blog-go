@@ -21,7 +21,7 @@ func (u User) Add(c *gin.Context) {
 	s := service.New()
 	err = s.AddUser(&param)
 	if err != nil {
-		fmt.Println("add err:", err)
+		fmt.Println("add error:", err)
 		return
 	}
 	data := gin.H{}

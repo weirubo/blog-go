@@ -15,7 +15,7 @@ func (s Service) AddCategory(param *CreateCategoryRequest) error {
 	return s.dao.CreateCategory(param.Name)
 }
 
-func (s Service) GetCategory(id int) (model.Category, error) {
+func (s Service) GetCategory(id uint) (model.Category, error) {
 	return s.dao.GetCategoryById(id)
 }
 

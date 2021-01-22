@@ -15,7 +15,7 @@ func (c Category) Create(db *gorm.DB) error {
 	return db.Create(&c).Error
 }
 
-func (c Category) GetById(db *gorm.DB, id int) (Category, error) {
+func (c Category) GetById(db *gorm.DB, id uint) (Category, error) {
 	category := Category{}
 	tx := db.Where("id", id).Find(&category)
 	if tx.Error != nil {

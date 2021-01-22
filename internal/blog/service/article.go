@@ -23,7 +23,7 @@ func (s Service) AddArticle(param *CreateArticleRequest) error {
 	return s.dao.CreateArticle(param.Title, param.Description, param.Content, param.Author, param.CategoryName, param.TagName, param.AuthorId, param.CategoryId, param.TagId)
 }
 
-func (s Service) GetArticle(id int) (model.Article, error) {
+func (s Service) GetArticle(id uint) (model.Article, error) {
 	return s.dao.GetArticleById(id)
 }
 

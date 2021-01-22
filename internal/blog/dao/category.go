@@ -13,7 +13,7 @@ func (d *Dao) CreateCategory(name string) error {
 	return category.Create(d.dbEngine)
 }
 
-func (d *Dao) GetCategoryById(id int) (model.Category, error) {
+func (d *Dao) GetCategoryById(id uint) (model.Category, error) {
 	category := model.Category{}
 	return category.GetById(d.dbEngine, id)
 }

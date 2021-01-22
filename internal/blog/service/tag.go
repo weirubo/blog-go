@@ -15,7 +15,7 @@ func (s Service) AddTag(param *CreateTagRequest) error {
 	return s.dao.CreateTag(param.Name)
 }
 
-func (s Service) GetTag(id int) (model.Tag, error) {
+func (s Service) GetTag(id uint) (model.Tag, error) {
 	return s.dao.GetTagById(id)
 }
 

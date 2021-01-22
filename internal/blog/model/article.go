@@ -23,7 +23,7 @@ func (a Article) Create(db *gorm.DB) error {
 	return db.Create(&a).Error
 }
 
-func (a Article) GetById(db *gorm.DB, id int) (Article, error) {
+func (a Article) GetById(db *gorm.DB, id uint) (Article, error) {
 	article := Article{}
 	tx := db.Where("id", id).Find(&article)
 	if tx.Error != nil {

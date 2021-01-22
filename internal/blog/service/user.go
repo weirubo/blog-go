@@ -22,7 +22,7 @@ func (s Service) AddUser(param *CreateUserRequest) error {
 	return s.dao.CreateUser(param.UserName, param.Email, param.PassWord)
 }
 
-func (s Service) GetUser(id int) (model.User, error) {
+func (s Service) GetUser(id uint) (model.User, error) {
 	return s.dao.GetUserByUid(id)
 }
 

@@ -31,7 +31,7 @@ func (u User) GetByEmail(db *gorm.DB) (User, error) {
 	return user, nil
 }
 
-func (u User) GetById(db *gorm.DB, id int) (User, error) {
+func (u User) GetById(db *gorm.DB, id uint) (User, error) {
 	user := User{}
 	tx := db.Where("id", id).Find(&user)
 	if tx.Error != nil {

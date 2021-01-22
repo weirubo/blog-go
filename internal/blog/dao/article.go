@@ -21,7 +21,7 @@ func (d *Dao) CreateArticle(title, description, content, author, categoryName, t
 	return article.Create(d.dbEngine)
 }
 
-func (d *Dao) GetArticleById(id int) (model.Article, error) {
+func (d *Dao) GetArticleById(id uint) (model.Article, error) {
 	article := model.Article{}
 	return article.GetById(d.dbEngine, id)
 }
