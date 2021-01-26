@@ -35,7 +35,7 @@ func (t Tag) Get(c *gin.Context) {
 		return
 	}
 	s := service.New()
-	tag, err := s.GetTag(id)
+	tag, err := s.GetTag(uint(id))
 	if err != nil {
 		fmt.Println("get error:", err)
 		return

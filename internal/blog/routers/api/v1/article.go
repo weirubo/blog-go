@@ -35,7 +35,7 @@ func (a Article) Get(c *gin.Context) {
 		return
 	}
 	s := service.New()
-	article, err := s.GetArticle(id)
+	article, err := s.GetArticle(uint(id))
 	if err != nil {
 		fmt.Println("get error:", err)
 		return

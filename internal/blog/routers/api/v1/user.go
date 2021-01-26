@@ -35,7 +35,7 @@ func (u User) Get(c *gin.Context) {
 		return
 	}
 	s := service.New()
-	user, err := s.GetUser(id)
+	user, err := s.GetUser(uint(id))
 	if err != nil {
 		fmt.Println("get error:", err)
 		return

@@ -35,7 +35,7 @@ func (cate Category) Get(c *gin.Context) {
 		return
 	}
 	s := service.New()
-	category, err := s.GetCategory(id)
+	category, err := s.GetCategory(uint(id))
 	if err != nil {
 		fmt.Println("get error:", err)
 		return
